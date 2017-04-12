@@ -4,35 +4,45 @@ var keys = require("./keys.js")
 var Twitter = require("twitter");
 
 
-// var spotify = require('spotify');
+var spotify = require('spotify');
 var request = require('request');
 
+
+//1. Twiiter 
+
 // See what's in keys. Added .twitterKeys to get inside the object
-console.log(keys.twitterKeys);
+// console.log(keys.twitterKeys);
 
 
+//Create my own version of the constructor
+var client = new Twitter(keys.twitterKeys);
 
-
-
-var myTweets = new Twitter(keys.twitterKeys);
-
-//See what's in myTweets
-// console.log(myTweets);
-
-
+// Create a var that represents my Twitter handle 
 var params = {
 	screen_name: 'taipeispeeder'
 };
 
-function getTweets() {
 
-	myTweets.get('statuses/user_timeline', params, function(error, tweets, response) {
+function listTweets() {
+	//Get data from Twitter
+	client.get('statuses/user_timeline', params, function(error, tweets, response) {
   		if (!error) {
-    		console.log(tweets);
-    		console.log("is it working?")
+  			for (var i = 0; i < 20; i ++) {
+  				console.log("--" + tweets[i].text + "--");
+  			}
   		}
 	});
+}
+
+
+if(process.argv[2] == "my-tweets") {
+	listTweets();
 };
 
-getTweets();
+
+
+
+//2. Spotify
+
+
 
