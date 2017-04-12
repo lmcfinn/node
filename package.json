@@ -1,0 +1,30 @@
+{
+  "name": "node",
+  "version": "1.0.0",
+  "description": "Latest 20 tweets",
+  "main": "keys.js",
+  "dependencies": {
+    "request": "^2.81.0",
+    "spotify": "^0.3.0",
+    "twitter": "^1.7.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lmcfinn/node.git"
+  },
+  "keywords": [
+    "twitter",
+    "latest",
+    "tweets"
+  ],
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/lmcfinn/node/issues"
+  },
+  "homepage": "https://github.com/lmcfinn/node#readme"
+}
