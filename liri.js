@@ -41,17 +41,7 @@ var song = process.argv[3];
 
 function getSong() {
 	spotify.search({ type: "track", query: song }, function(error, data) {
-		if (error) {
-			song = "The Sign"			
-		    console.log(data.tracks.items[3].artists[0].name);
-		    console.log("----------------------------------")
-		    console.log(data.tracks.items[3].name);
-		    console.log("----------------------------------")
-		    console.log(data.tracks.items[3].preview_url);
-		    console.log("----------------------------------")
-		    console.log(data.tracks.items[3].album.name);
-		    return;
-		} else {
+		if (song) {
 			// console.log(data.tracks.items[0]);
 		    console.log(data.tracks.items[0].artists[0].name);
 		    console.log("----------------------------------")
@@ -61,6 +51,34 @@ function getSong() {
 		    console.log("----------------------------------")
 		    console.log(data.tracks.items[0].album.name);
 		    console.log("----------------------------------")
+		} 
+
+		if (!song) {
+
+			// console.log("nothing")
+
+			spotify.search({ type: "track", query: "The Sign" }, function(error, data) {
+				if (!error) {
+				    console.log(data.tracks.items[3].artists[0].name);
+				    console.log("----------------------------------")
+				    console.log(data.tracks.items[3].name);
+				    console.log("----------------------------------")
+				    console.log(data.tracks.items[3].preview_url);
+				    console.log("----------------------------------")
+				    console.log(data.tracks.items[3].album.name);
+				    console.log("----------------------------------")
+				};
+			}); 
+
+			// song = "The Sign"
+		 //    console.log(data.tracks.items[3].artists[0].name);
+		 //    console.log("----------------------------------")
+		 //    console.log(data.tracks.items[3].name);
+		 //    console.log("----------------------------------")
+		 //    console.log(data.tracks.items[3].preview_url);
+		 //    console.log("----------------------------------")
+		 //    console.log(data.tracks.items[3].album.name);
+		 //    console.log("----------------------------------")
 		}
 	});
 };
