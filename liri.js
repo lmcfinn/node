@@ -31,6 +31,7 @@ function getTweets() {
 	});
 };
 
+//Set up command to execute getTweets function
 if (process.argv[2] == "my-tweets") {
 	getTweets();
 };
@@ -40,6 +41,7 @@ if (process.argv[2] == "my-tweets") {
 
 //Set up terminal input
 var song = process.argv[3];
+var noSong = "The Sign";
 
 //Create a function to get song data
 function getSong() {
@@ -51,7 +53,7 @@ function getSong() {
 			} 
 			if (!song) {
 				// console.log("nothing")
-				spotify.search({ type: "track", query: "The Sign" }, function(error, data) {
+				spotify.search({ type: "track", query: noSong }, function(error, data) {
 					if (!error) {
 				    	printSongResults(data, 3);
 					}
