@@ -45,20 +45,19 @@ var song = process.argv[3];
 function getSong() {
 	spotify.search({ type: "track", query: song }, function(error, data) {
 		if (!error){
-
 			if (song) {
-			// console.log(data.tracks.items[0]);
-		    printSongResults(data, 0)
+				// console.log(data.tracks.items[0]);
+			    printSongResults(data, 0);
 			} 
 			if (!song) {
 				// console.log("nothing")
 				spotify.search({ type: "track", query: "The Sign" }, function(error, data) {
 					if (!error) {
-				    	printSongResults(data, 3)
+				    	printSongResults(data, 3);
 					}
 				}); 
-			}
-		}
+			};
+		};
 	});
 };
 
@@ -80,7 +79,7 @@ if (process.argv[2] == "spotify-this-song") {
 };
 
 
-//Request OMBI
+//3. Request OMBI
 
 //Set up terminal input
 var movie = process.argv[3];
@@ -123,7 +122,7 @@ if (process.argv[2] == "movie-this") {
 };
 
 
-// Do what it says
+//4. Do what it says
 
 //Access random.tet via node fs
 fs.readFile("random.txt", "utf8", function(error, data) {
@@ -134,17 +133,19 @@ fs.readFile("random.txt", "utf8", function(error, data) {
 	// console.log(dataArr[0] + " " + dataArr[1]);
 
 	var dataCommand = dataArr[0];
-	var dataSong = dataArr[1];
+	var dataInput = dataArr[1];
 
-	//Create function to call up the song accordingly to waht's in random.txt
+	// Create function to call up the song accordingly to waht's in random.txt
 	function doThis(){
-		spotify.search({ type: "track", query: dataSong }, function(error, data) {
-			if (!error){
-				if (dataSong) {
-		    		printSongResults(data, 0)
-				} 
-			};
-		});
+		if (dataCommand == "spotify-this-song"){
+			spotify.search({ type: "track", query: dataInput }, function(error, data) {
+				if (!error){
+					if (dataInput) {
+			    		printSongResults(data, 0);
+					}; 
+				};
+			});
+		};
 	};
 
 	//Set up command to execute doThis function
@@ -152,6 +153,8 @@ fs.readFile("random.txt", "utf8", function(error, data) {
 		doThis();
 	}
 });
+
+
  
 
 
