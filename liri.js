@@ -45,22 +45,22 @@ var noSong = "The Sign";
 
 //Create a function to get song data
 function getSong() {
-	spotify.search({ type: "track", query: song }, function(error, data) {
-		if (!error){
-			if (song) {
+	if (song){
+		spotify.search({ type: "track", query: song }, function(error, data) {
+			if (!error){
 				// console.log(data.tracks.items[0]);
 			    printSongResults(data, 0);
-			} 
-			if (!song) {
-				// console.log("nothing")
-				spotify.search({ type: "track", query: noSong }, function(error, data) {
-					if (!error) {
-				    	printSongResults(data, 3);
-					}
-				}); 
-			};
-		};
-	});
+			}
+		}); 
+	}
+	if (!song) {
+		// console.log("nothing")
+		spotify.search({ type: "track", query: noSong }, function(error, data) {
+			if (!error) {
+		    	printSongResults(data, 3);
+			}
+		}); 
+	};
 };
 
 //Set up this function to avoid repeating code
@@ -89,7 +89,7 @@ var movie = process.argv[3];
 //Create a function to get movie data
 function getMovie(){
 
-	if(movie){
+	if (movie){
 		request("http://www.omdbapi.com/?t=" + movie + "&y=&plot=short&r=json", function (error, response, body) {
 			if (!error && response.statusCode === 200) {
 				printMovieResults(body);
@@ -97,7 +97,7 @@ function getMovie(){
 		});
 	}
 
-	if(!movie){
+	if (!movie){
 		request("http://www.omdbapi.com/?t=" + "Mr. Nobody" + "&y=&plot=short&r=json", function (error, response, body) {
 			if (!error && response.statusCode === 200) {
 				printMovieResults(body);
@@ -130,7 +130,7 @@ if (process.argv[2] == "movie-this") {
 fs.readFile("random.txt", "utf8", function(error, data) {
 	// console.log(data);
 	
-	//Make what's in random.txt into an array
+	//Make random.txt text into an array
 	var dataArr = data.split(",");
 	// console.log(dataArr[0] + " " + dataArr[1]);
 
@@ -140,18 +140,18 @@ fs.readFile("random.txt", "utf8", function(error, data) {
 	// Create function to call up the song accordingly to waht's in random.txt
 	function doThis(){
 		if (dataCommand == "spotify-this-song"){
-			spotify.search({ type: "track", query: dataInput }, function(error, data) {
-				if (!error){
-					if (dataInput) {
-			    		printSongResults(data, 0);
-					}; 
-				};
-			});
+			if (dataInput) {
+					spotify.search({ type: "track", query: dataInput }, function(error, data) {
+						if (!error){
+					    	printSongResults(data, 0);
+						}; 
+				});
+			};
 		};
 	};
 
 	//Set up command to execute doThis function
-	if(process.argv[2] == "do-what-it-says"){
+	if (process.argv[2] == "do-what-it-says"){
 		doThis();
 	}
 });
